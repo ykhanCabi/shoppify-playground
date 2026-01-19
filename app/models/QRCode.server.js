@@ -75,6 +75,7 @@ async function supplementQRCode(qrCode, graphql) {
 
   return {
     ...qrCode,
+    createdAt: qrCode.createdAt.toISOString(),
     productDeleted: !product?.title,
     productTitle: product?.title,
     productImage: product?.media?.nodes[0]?.preview?.image?.url,
