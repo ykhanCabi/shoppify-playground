@@ -3,10 +3,8 @@ import {
   useActionData,
   useLoaderData,
   useSubmit,
-  useNavigation,
   useNavigate,
   useParams,
-  Link,
 } from "react-router";
 import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
@@ -69,7 +67,6 @@ export default function QRCodeForm() {
   const [initialFormState, setInitialFormState] = useState(qrCode);
   const [formState, setFormState] = useState(qrCode);
   const errors = useActionData()?.errors || {};
-  const isSaving = useNavigation().state === "submitting";
   const isDirty =
     JSON.stringify(formState) !== JSON.stringify(initialFormState);
 

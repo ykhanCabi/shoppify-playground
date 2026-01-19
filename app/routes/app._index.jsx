@@ -1,4 +1,5 @@
-import { useLoaderData, Link } from "react-router";
+import { useLoaderData } from "react-router";
+import PropTypes from "prop-types";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 
 import { authenticate } from "../shopify.server";
@@ -68,6 +69,10 @@ const QRTable = ({ qrCodes }) => (
   </s-section>
 );
 
+QRTable.propTypes = {
+  qrCodes: PropTypes.array.isRequired,
+};
+
 const QRTableRow = ({ qrCode }) => (
   <s-table-row id={qrCode.id} position={qrCode.id}>
     <s-table-cell>
@@ -105,6 +110,18 @@ const QRTableRow = ({ qrCode }) => (
     <s-table-cell>{qrCode.scans}</s-table-cell>
   </s-table-row>
 );
+
+QRTableRow.propTypes = {
+  qrCode: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    productTitle: PropTypes.string,
+    productImage: PropTypes.string,
+    productDeleted: PropTypes.bool.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    scans: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default function Index() {
   const { qrCodes } = useLoaderData();
